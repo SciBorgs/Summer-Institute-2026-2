@@ -99,7 +99,8 @@
       "Epilogue": {
         "Stats": {
           "open": true
-        }
+        },
+        "open": true
       },
       "Robot": {
         "drive": {
@@ -171,8 +172,7 @@
               "open": true
             },
             "open": true
-          },
-          "open": true
+          }
         },
         "open": true
       }
@@ -180,5 +180,20 @@
   },
   "NetworkTables Info": {
     "visible": true
+  },
+  "Plot": {
+    "Plot <0>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.8500000238418579
+          ],
+          "height": 338
+        }
+      ]
+    }
   }
 }
