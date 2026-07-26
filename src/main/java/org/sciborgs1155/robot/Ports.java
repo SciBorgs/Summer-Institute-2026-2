@@ -55,4 +55,10 @@ public final class Ports {
     public static final int LEADER = 3;
     public static final int FOLLOWER = 4;
   }
+
+  public static final class Hood {
+    public static final int LEADER = 1;
+    public static final int FOLLOWER = 2;
+    public static final int MOTOR = 3;
+  }
 }

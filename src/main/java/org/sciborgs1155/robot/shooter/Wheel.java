@@ -1,8 +1,6 @@
 package org.sciborgs1155.robot.shooter;
 
 import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.networktables.DoubleEntry;
-import org.sciborgs1155.lib.LoggingUtils;
 
 public class Wheel implements WheelIO, AutoCloseable {
   private final WheelIO hardware;
@@ -22,7 +20,7 @@ public class Wheel implements WheelIO, AutoCloseable {
     return hardware.velocity();
   }
 
-  log("shooter/velocity", velocity());
+  // log("shooter/velocity", velocity());
 
   @Override
   public void close() {}
