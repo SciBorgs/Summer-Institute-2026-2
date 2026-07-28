@@ -197,7 +197,7 @@ public class Robot extends CommandRobot {
         .onTrue(Commands.runOnce(() -> speedMultiplier = Constants.SLOW_SPEED_MULTIPLIER))
         .onFalse(Commands.runOnce(() -> speedMultiplier = Constants.FULL_SPEED_MULTIPLIER));
 
-    driver.x().whileTrue(shooter.runShooter(20));
+    driver.x().whileTrue(shooter.runShooter(100));
     // TODO: Add any additional bindings.
   }
 
