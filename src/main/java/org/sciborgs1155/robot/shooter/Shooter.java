@@ -21,7 +21,7 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(WheelIO hardware) {
     this.hardware = hardware;
-    setDefaultCommand(run(() -> hardware.setVoltage(0)));
+    setDefaultCommand(runShooter(0));
   }
 
   public static Shooter create() {
@@ -29,8 +29,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public Command runShooter(double velocity) {
-    return run(() -> hardware.setVoltage(velocity));
-    update(velocity);
+    return run(() -> update(velocity));
   }
 
   public double velocity() {
