@@ -16,8 +16,7 @@ public class SimHood implements HoodIO {
             Math.toRadians(HoodConstants.MIN_ANGLE),
             Math.toRadians(HoodConstants.MAX_ANGLE),
             true,
-            Math.toRadians(HoodConstants.DEFAULT_ANGLE),
-            null);
+            Math.toRadians(HoodConstants.DEFAULT_ANGLE));
   }
 
   public void setVoltage(double voltage) {
@@ -26,6 +25,6 @@ public class SimHood implements HoodIO {
   }
 
   public double getAngle() {
-    return Math.toRadians((hood.getAngleRads()));
+    return Math.toDegrees(hood.getAngleRads());
   }
 }
