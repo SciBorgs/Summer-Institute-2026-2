@@ -100,8 +100,7 @@
       "Epilogue": {
         "Stats": {
           "open": true
-        },
-        "open": true
+        }
       },
       "Robot": {
         "drive": {
@@ -173,7 +172,8 @@
               "open": true
             },
             "open": true
-          }
+          },
+          "open": true
         },
         "hood": {
           "open": true,

@@ -50,12 +50,7 @@ public final class Ports {
   public static final class LEDs {
     public static final int LED_PORT = 9;
   }
-
-  public static final class Shooter {
-    public static final int LEADER = 3;
-    public static final int FOLLOWER = 4;
-  }
-
+  
   public static final class Hood {
     public static final int LEADER = 1;
     public static final int FOLLOWER = 2;
