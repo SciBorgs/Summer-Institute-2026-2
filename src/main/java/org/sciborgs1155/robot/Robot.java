@@ -58,6 +58,7 @@ public class Robot extends CommandRobot {
   // SUBSYSTEMS
   private final Drive drive = Drive.create();
   private final Vision vision = Vision.create();
+  private final Hopper hopper = Hopper.create();
 
   // COMMANDS
   private final Alignment align = new Alignment(drive);
