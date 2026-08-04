@@ -1,7 +1,6 @@
 package org.sciborgs1155.robot.hopper;
 
 import static org.sciborgs1155.robot.Constants.TUNING;
-import static org.sciborgs1155.robot.Ports.Hopper.BEAMBREAK;
 import static org.sciborgs1155.robot.hopper.HopperConstants.A;
 import static org.sciborgs1155.robot.hopper.HopperConstants.D;
 import static org.sciborgs1155.robot.hopper.HopperConstants.I;
@@ -24,34 +23,44 @@ import org.sciborgs1155.lib.Beambreak;
 import org.sciborgs1155.lib.Tuning;
 import org.sciborgs1155.robot.Robot;
 
-public class Hopper extends SubsystemBase {
-  private final HopperIO hardware;
-  private final PIDController pid = new PIDController(P, I, D);
-  private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(S, V, A);
+import com.ctre.phoenix6.hardware.TalonFX;
 
-  public static Hopper create(){
-    return Robot.isReal() ? new RealHopper() : new NoHopper();
+public class Hopper extends SubsystemBase implements AutoCloseable{
+  private final SimpleMotor hardware;
+  private final Beambreak beambreak;
+  private final Trigger blocked;
+
+  public static Hopper create() {
+    return Robot.isReal() ? new Hopper(realMotor(), Beambreak.real(BEAMBREAK)) : none();
   }
 
-  public static Hopper(){
-    return new Hopper(new NoHopper())
+  public static Hopper none() {
+    return new Hopper(Hopper.none(), Beambreak.none());
   }
-  private Hopper(HopperIO hardware) {
+
+  private static SimpleMotor realMotor() {
+    TalonFX motor(HopperConstants.MOTOR_ID, TUNING.get(Tuning.HOPPER));
+    TalonFX.configureCurrentLimit(HopperConstants.CURRENT_LIMIT);
+    return SimpleMotor.talon(motor);
+  }
+
+  private Hopper(HopperIO hardware, Beambreak beambreak) {
     this.hardware = hardware;
+    this.beambreak = beambreak;
+    this.blocked = new Trigger(beambreak::get);
   }
 
-  public void update(double targetVelocity) {
-    double voltage = MathUtil.clamp(pid.calculate(hardware.getVelocity(), targetVelocity)+ feedforward.calculate(targetVelocity), -MAX_VOLTAGE, MAX_VOLTAGE);
-    hardware.setVoltage(voltage);
+
+  public Command intake(DoubleSupplier speed) {
+    return run(() -> hardware.set(speed.getAsDouble()));
   }
 
-  public Command runHopper(DoubleSupplier targetVelocity) {
-    return run(() -> update(targetVelocity.getAsDouble())),
+  public Command outtake(DoubleSupplier speed) {
+    return run(() -> hardware.set(-speed.getAsDouble()));
   }
 
-  @Logged
-  public double velocity() {
-    return hardware.velocity();
+  public Command stop() {
+    return run(() -> hardware.set(0));
   }
 
   @Override
