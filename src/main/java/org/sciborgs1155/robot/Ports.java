@@ -21,7 +21,8 @@ public final class Ports {
           entry(Drive.FRONT_LEFT_CANCODER, "FL cancoder"),
           entry(Drive.REAR_LEFT_CANCODER, "RL cancoder"),
           entry(Drive.FRONT_RIGHT_CANCODER, "FR cancoder"),
-          entry(Drive.REAR_RIGHT_CANCODER, "RR cancoder"));
+          entry(Drive.REAR_RIGHT_CANCODER, "RR cancoder"),
+          entry(Hopper.MOTOR, "hopper"));
 
   public static final class OI {
     public static final int OPERATOR = 0;
@@ -60,5 +61,10 @@ public final class Ports {
     public static final int LEADER = 1;
     public static final int FOLLOWER = 2;
     public static final int MOTOR = 3;
+  }
+
+  public static final class Hopper {
+    public static final int MOTOR = 21;
+    public static final int BEAMBREAK = 0;
   }
 }
